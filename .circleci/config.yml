@@ -30,3 +30,12 @@ jobs:
 
       - store_artifacts:
           path: ~/repo/out/make
+
+  buildWindows:
+    machine:
+        image: windows-default # Windows machine image
+      resource_class: windows.medium
+      steps:
+        # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
