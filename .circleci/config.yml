@@ -23,7 +23,6 @@ jobs:
           command: |
             sudo apt-get update -y
             sudo apt-get install -y dpkg fakeroot
-
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
@@ -37,17 +36,27 @@ jobs:
 
   buildWin: # name of your job
     executor:
-      name: win/default # executor type
-      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
-
+      name: win/default
+      size: "medium" 
+    working_directory: C:\Users\circleci\repo
     steps:
       # Commands are run in a Windows virtual machine environment
       - checkout
-      - run: Write-Host 'Hello, Windows'
+      - run:           
+          name: Update NPM
+          command: "npm install -g npm"
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Generate Builds
+          command: npm run make
+      - store_artifacts:
+          path: C:\Users\circleci\repo\out\make
 
 workflows:
   build-test-deploy:
     jobs:
-      - buildLinux
+      #- buildLinux
       - buildWin
 
