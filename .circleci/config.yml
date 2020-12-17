@@ -42,9 +42,11 @@ jobs:
     steps:
       # Commands are run in a Windows virtual machine environment
       - checkout
-#      - run:           
-#          name: Update NPM
-#          command: "npm install -g npm"
+      - run:           
+          name: Update NPM
+          command: |
+            npm install -g npm-windows-upgrade
+            npm-windows-upgrade
       - run:
           name: Install Dependencies
           command: npm install
@@ -52,10 +54,10 @@ jobs:
           name: Generate Builds
           command: npm run make
       - store_artifacts:
-          path: C:\Users\circleci\repo\out\make
+          path: .\repo\out\make
 
 workflows:
-  build-test-deploy:
+  buildArtifacts:
     jobs:
       #- buildLinux
       - buildWin
