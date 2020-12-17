@@ -46,7 +46,7 @@ jobs:
           name: Update NPM
           command: |
             npm install -g npm-windows-upgrade
-            npm-windows-upgrade
+            npm-windows-upgrade -p -v latest
       - run:
           name: Install Dependencies
           command: npm install
@@ -54,7 +54,7 @@ jobs:
           name: Generate Builds
           command: npm run make
       - store_artifacts:
-          path: .\repo\out\make
+          path: .\out\make
 
 workflows:
   buildArtifacts:
