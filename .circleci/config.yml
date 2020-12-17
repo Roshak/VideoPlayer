@@ -42,9 +42,9 @@ jobs:
     steps:
       # Commands are run in a Windows virtual machine environment
       - checkout
-      - run:           
-          name: Update NPM
-          command: "npm install -g npm"
+#      - run:           
+#          name: Update NPM
+#          command: "npm install -g npm"
       - run:
           name: Install Dependencies
           command: npm install
