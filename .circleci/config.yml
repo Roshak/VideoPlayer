@@ -42,11 +42,12 @@ jobs:
     steps:
       # Commands are run in a Windows virtual machine environment
       - checkout
-      - run:           
-          name: Update NPM
-          command: |
-            npm install -g npm-windows-upgrade
-            npm-windows-upgrade -p -v latest
+#      - run:           
+#          name: Update NPM
+#          shell: cmd.exe
+#          command: |
+#            npm install -g -p npm-windows-upgrade
+#            npm-windows-upgrade -p -e -v latest
       - run:
           name: Install Dependencies
           command: npm install
