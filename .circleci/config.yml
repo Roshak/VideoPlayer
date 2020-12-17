@@ -1,6 +1,10 @@
 version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0 
+
 jobs:
-  build:
+  linuxBuild:
     working_directory: ~/repo
     docker:
       - image: circleci/node:11
@@ -31,11 +35,12 @@ jobs:
       - store_artifacts:
           path: ~/repo/out/make
 
-  buildWindows:
-    machine:
-        image: windows-default # Windows machine image
-      resource_class: windows.medium
-      steps:
-        # Commands are run in a Windows virtual machine environment
-        - checkout
-        - run: Write-Host 'Hello, Windows'
+  winBuild: # name of your job
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
